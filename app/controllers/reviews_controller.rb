@@ -18,7 +18,7 @@ class ReviewsController < ApplicationController
   end
   # GET /reviews or /reviews.json
   def index
-    @reviews = Review.all
+    @reviews = Review.where(movie_id: params[:movie_id])
   end
 
   # GET /reviews/1 or /reviews/1.json
