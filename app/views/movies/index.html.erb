@@ -1,3 +1,10 @@
+  <!-- app/views/movies/upload.html.erb -->
+  <h1>Upload CSV File</h1>
+  <%= form_tag import_csv_movies_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag 'Upload' %>
+  <% end %>
+
 <p style="color: green"><%= notice %></p>
 
 <h1>Movies</h1>

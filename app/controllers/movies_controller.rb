@@ -1,12 +1,14 @@
+require 'csv_importer'
+
 class MoviesController < ApplicationController
   before_action :set_movie, only: %i[ show edit update destroy ]
 
 
   def import_csv
-    uploaded_file = movie_params[:file]
+    uploaded_file = params[:file]
 
     if uploaded_file
-      CsvImporter.review_importer(uploaded_file)
+      CsvImporter.movie_import(uploaded_file)
       flash[:success] = 'CSV file uploaded and data imported successfully.'
     else
       flash[:error] = 'Please upload a valid CSV file.'

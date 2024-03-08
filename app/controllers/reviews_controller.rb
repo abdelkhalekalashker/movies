@@ -1,9 +1,11 @@
+require 'csv_importer'
+
 class ReviewsController < ApplicationController
   before_action :set_review, only: %i[ show edit update destroy ]
 
 
   def import_csv
-    uploaded_file = review_params[:file]
+    uploaded_file = params[:file]
 
     if uploaded_file
       CsvImporter.review_importer(uploaded_file)

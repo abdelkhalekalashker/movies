@@ -8,6 +8,6 @@ class Review < ApplicationRecord
     movie = Movie.find(movie_id)
     # this can be created using counter cache
     reviews_stars = Review.where(movie_id: movie).pluck(:stars)
-    movie.update(average_rate: reviews_stars.sum / reviews_stars.size)
+    movie.update(avarage_rate: reviews_stars.sum / reviews_stars.size)
   end
 end
