@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     collection { post :import_csv }
   end  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  get '/search', to: "actors#search"
   # Defines the root path route ("/")
   # root "articles#index"
 end

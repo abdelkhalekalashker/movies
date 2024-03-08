@@ -1,0 +1,9 @@
+<h1>Movies</h1>
+
+<div id="actors">
+  <% @actors.each do |actor| %>
+    <%= render actor %>
+  <% end %>
+</div>
+
+<%= link_to "back to movies", root_path %>
