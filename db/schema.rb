@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_08_192625) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_08_194845) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,7 +24,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_192625) do
   end
 
   create_table "actors", force: :cascade do |t|
-    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -62,7 +61,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_192625) do
   end
 
   create_table "directors", force: :cascade do |t|
-    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -77,7 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_192625) do
     t.string "country"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "avarage_rate"
+    t.float "average_rate", default: 0.0
   end
 
   create_table "reviews", force: :cascade do |t|
