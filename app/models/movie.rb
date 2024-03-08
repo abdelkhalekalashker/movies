@@ -8,4 +8,6 @@ class Movie < ApplicationRecord
   has_many :cities, through: :city_movies
 
   has_many :country, through: :cities
+
+  has_many :reviews
 end

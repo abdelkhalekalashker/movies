@@ -14,7 +14,7 @@ class CsvImporter
       actor = Actor.create(name: row["Actor"],  password: "Top secret") if actor.nil?
 
 
-      movie = Movie.find_or_create_by(movie: row["Movie"], year: row["Year"], description: row["Description"])
+      movie = Movie.find_or_create_by(movie: row["Movie"], year: row["Year"].to_i, description: row["Description"])
 
       city_movie = CityMovie.find_or_create_by(movie_id: movie.id, city_id: city.id)
 
@@ -28,6 +28,7 @@ class CsvImporter
   def self.review_importer(file)
     CSV.foreach(file.path, headers: true) do |row|
       user = User.find_by(name: row["User"])
+      user = User.create(name: row["User"],  password: "Top secret") if user.nil?
       movie = Movie.find_by(movie: row["Movie"])
       Review.create(stars: row["Stars"], content: row["Review"], movie: movie, user: user)
     end
