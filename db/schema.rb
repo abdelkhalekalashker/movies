@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_08_153739) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_08_155835) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_153739) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_cities_on_country_id"
+  end
+
+  create_table "city_movies", force: :cascade do |t|
+    t.bigint "city_id", null: false
+    t.bigint "movie_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_city_movies_on_city_id"
+    t.index ["movie_id"], name: "index_city_movies_on_movie_id"
   end
 
   create_table "countries", force: :cascade do |t|
@@ -64,6 +73,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_153739) do
   end
 
   add_foreign_key "cities", "countries"
+  add_foreign_key "city_movies", "cities"
+  add_foreign_key "city_movies", "movies"
   add_foreign_key "reviews", "movies"
   add_foreign_key "reviews", "users"
 end
