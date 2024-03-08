@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :cities
+  resources :countries
   resources :reviews
   devise_for :users
   resources :movies
