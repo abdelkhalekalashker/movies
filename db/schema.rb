@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_08_161946) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_08_162910) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,6 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_161946) do
   end
 
   create_table "actors", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -51,7 +52,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_161946) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "director_movies", force: :cascade do |t|
+    t.bigint "director_id", null: false
+    t.bigint "movie_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["director_id"], name: "index_director_movies_on_director_id"
+    t.index ["movie_id"], name: "index_director_movies_on_movie_id"
+  end
+
   create_table "directors", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -97,6 +108,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_161946) do
   add_foreign_key "cities", "countries"
   add_foreign_key "city_movies", "cities"
   add_foreign_key "city_movies", "movies"
+  add_foreign_key "director_movies", "directors"
+  add_foreign_key "director_movies", "movies"
   add_foreign_key "reviews", "movies"
   add_foreign_key "reviews", "users"
 end
