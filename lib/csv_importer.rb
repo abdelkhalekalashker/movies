@@ -6,12 +6,10 @@ class CsvImporter
       country = Country.find_or_create_by(name: row["Country"])
       city = City.find_or_create_by(name: row["Filming location"], country_id: country.id)
 
-      director = Director.find_by(name: row["Director"])
-      director = Director.create(name: row["Director"], password: "Top secret") if director.nil?
+      director = Director.find_or_create_by(name: row["Director"])
 
-      actor = Actor.find_by(name: row["Actor"])
 
-      actor = Actor.create(name: row["Actor"],  password: "Top secret") if actor.nil?
+      actor = Actor.find_or_create_by(name: row["Actor"])
 
 
       movie = Movie.find_or_create_by(movie: row["Movie"], year: row["Year"].to_i, description: row["Description"])
@@ -27,10 +25,11 @@ class CsvImporter
 
   def self.review_importer(file)
     CSV.foreach(file.path, headers: true) do |row|
-      user = User.find_by(name: row["User"])
-      user = User.create(name: row["User"],  password: "Top secret") if user.nil?
-      movie = Movie.find_by(movie: row["Movie"])
-      Review.create(stars: row["Stars"], content: row["Review"], movie: movie, user: user)
+
+      user = User.find_or_create_by(name: row["User"])
+
+      movie = Movie.find_or_create_by(movie: row["Movie"])
+      review = Review.create(stars: row["Stars"], content: row["Review"], movie: movie, user: user)
     end
   end
 

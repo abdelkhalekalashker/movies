@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   resources :reviews do
     collection { post :import_csv }
   end
-  devise_for :users
   resources :movies do
     resources :reviews
     collection { post :import_csv }

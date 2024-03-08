@@ -86,26 +86,19 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_202416) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", default: ""
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "type"
     t.string "name"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "actor_movies", "actors"
-  add_foreign_key "actor_movies", "movies"
+  add_foreign_key "actor_movies", "users", column: "actor_id"
+  add_foreign_key "actor_movies", "users", column: "movie_id"
   add_foreign_key "cities", "countries"
   add_foreign_key "city_movies", "cities"
   add_foreign_key "city_movies", "movies"
-  add_foreign_key "director_movies", "directors"
-  add_foreign_key "director_movies", "movies"
+  add_foreign_key "director_movies", "users", column: "director_id"
+  add_foreign_key "director_movies", "users", column: "movie_id"
   add_foreign_key "reviews", "movies"
   add_foreign_key "reviews", "users"
 end

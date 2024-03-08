@@ -1,8 +1,8 @@
 class CreateActorMovies < ActiveRecord::Migration[7.0]
   def change
     create_table :actor_movies do |t|
-      t.references :actor, null: false, foreign_key: true
-      t.references :movie, null: false, foreign_key: true
+      t.references :actor, foreign_key: { to_table: :users },null: false
+      t.references :movie, foreign_key: { to_table: :users },null: false
 
       t.timestamps
     end
