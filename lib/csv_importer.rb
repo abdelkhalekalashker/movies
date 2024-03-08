@@ -22,4 +22,13 @@ class CsvImporter
     end
   end
 
+  def self.review_importer
+    CSV.foreach(file.path, headers: true) do |row|
+      user = User.find_by(name: row["User"])
+      movie = Movie.find_by(name: row["Movie"])
+      Review.create(stars: row["Stars"], content: row["Review"], movie: movie, user: user)
+    end
+  end
+
+
 end

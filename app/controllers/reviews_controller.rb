@@ -1,6 +1,19 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: %i[ show edit update destroy ]
 
+
+  def import_csv
+    uploaded_file = review_params[:file]
+
+    if uploaded_file
+      CsvImporter.review_importer(uploaded_file)
+      flash[:success] = 'CSV file uploaded and data imported successfully.'
+    else
+      flash[:error] = 'Please upload a valid CSV file.'
+    end
+
+    redirect_to root_path
+  end
   # GET /reviews or /reviews.json
   def index
     @reviews = Review.all
@@ -65,6 +78,6 @@ class ReviewsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def review_params
-      params.require(:review).permit(:stars, :movie_id, :user_id, :content)
+      params.require(:review).permit(:stars, :movie_id, :user_id, :content, :file)
     end
 end

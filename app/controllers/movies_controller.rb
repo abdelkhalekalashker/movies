@@ -1,6 +1,20 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: %i[ show edit update destroy ]
 
+
+  def import_csv
+    uploaded_file = movie_params[:file]
+
+    if uploaded_file
+      CsvImporter.review_importer(uploaded_file)
+      flash[:success] = 'CSV file uploaded and data imported successfully.'
+    else
+      flash[:error] = 'Please upload a valid CSV file.'
+    end
+
+    redirect_to root_path
+  end
+
   # GET /movies or /movies.json
   def index
     @movies = Movie.all
@@ -65,6 +79,6 @@ class MoviesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def movie_params
-      params.require(:movie).permit(:movie, :description, :year, :director, :actor, :filming_location, :country)
+      params.require(:movie).permit(:movie, :description, :year, :director, :actor, :filming_location, :country, :file)
     end
 end
