@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_08_202416) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_05_115133) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_202416) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["actor_id"], name: "index_actor_movies_on_actor_id"
+    t.index ["movie_id", "actor_id"], name: "index_actor_movies_on_movie_id_and_actor_id", unique: true
     t.index ["movie_id"], name: "index_actor_movies_on_movie_id"
   end
 
@@ -34,6 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_202416) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_cities_on_country_id"
+    t.index ["name", "country_id"], name: "index_cities_on_name_and_country_id", unique: true
   end
 
   create_table "city_movies", force: :cascade do |t|
@@ -42,6 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_202416) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["city_id"], name: "index_city_movies_on_city_id"
+    t.index ["movie_id", "city_id"], name: "index_city_movies_on_movie_id_and_city_id", unique: true
     t.index ["movie_id"], name: "index_city_movies_on_movie_id"
   end
 
@@ -49,6 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_202416) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_countries_on_name", unique: true
   end
 
   create_table "director_movies", force: :cascade do |t|
@@ -57,6 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_202416) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["director_id"], name: "index_director_movies_on_director_id"
+    t.index ["movie_id", "director_id"], name: "index_director_movies_on_movie_id_and_director_id", unique: true
     t.index ["movie_id"], name: "index_director_movies_on_movie_id"
   end
 
@@ -72,6 +77,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_08_202416) do
     t.datetime "updated_at", null: false
     t.float "average_rate", default: 0.0
     t.integer "year"
+    t.index ["movie"], name: "index_movies_on_movie", unique: true
   end
 
   create_table "reviews", force: :cascade do |t|

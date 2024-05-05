@@ -74,3 +74,5 @@ end
 gem "devise", "~> 4.9"
 
 gem "csv"
+
+gem 'activerecord-import' # bulk insert to database to avoid N + 1 query insertions
